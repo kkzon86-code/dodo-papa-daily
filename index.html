@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>도도아빠의 일상 · 4살·7살 아빠의 실전 육아 노트</title>
+<meta name="description" content="4살·7살 두 아들을 키우는 아빠가 직접 사보고 가본 장난감, 경기권 나들이, 육아템만 골라 담은 큐레이션. 광고보다 우리 집 후기가 먼저입니다." />
+<meta name="theme-color" content="#FFF8F1" />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="도도아빠의 일상 · 4살·7살 아빠의 실전 육아 노트" />
+<meta property="og:description" content="직접 사보고 가본 것만 담은 육아템·장난감·나들이 큐레이션" />
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧸</text></svg>" />
+<style>
+  /* ============================================================
+     도도아빠의 일상 — 시안 v1 (단일 파일 / 외부 의존성 없음)
+     색·글꼴·카드 내용은 아래 :root 와 ITEMS 배열에서 한 번에 바꿀 수 있습니다.
+     ============================================================ */
+  :root{
+    --cream:#FFF8F1;
+    --cream-2:#FDEFE2;
+    --ink:#2B2622;
+    --ink-soft:#6E645C;
+    --ink-faint:#9A8F86;
+    --line:#EFE2D5;
+    --card:#FFFFFF;
+    --accent:#F0673A;
+    --accent-soft:#FFE7DC;
+    --accent-dark:#C94F26;
+    --green:#3E7D5A;
+    --green-soft:#E4F1E9;
+    --blue:#3D6E9E;
+    --blue-soft:#E4EEF7;
+    --yellow:#FFC24B;
+    --radius:22px;
+    --shadow-sm:0 2px 8px rgba(86,60,40,.06);
+    --shadow-md:0 12px 30px -12px rgba(86,60,40,.22);
+    --shadow-lg:0 24px 60px -24px rgba(86,60,40,.30);
+    --max:1160px;
+    --font:"Pretendard Variable",Pretendard,-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Noto Sans KR","Malgun Gothic",system-ui,sans-serif;
+  }
+  *,*::before,*::after{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;
+    font-family:var(--font);
+    background:var(--cream);
+    color:var(--ink);
+    line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+    word-break:keep-all;
+  }
+  img{max-width:100%;display:block}
+  a{color:inherit}
+  button{font-family:inherit}
+  ::selection{background:var(--accent-soft)}
+  .wrap{width:min(100% - 40px,var(--max));margin-inline:auto}
+
+  /* ---------- 상단 안내 띠 (시안 표시 · 배포 시 삭제 가능) ---------- */
+  .demo-bar{
+    background:#2B2622;color:#FFE9DC;font-size:12.5px;letter-spacing:.01em;
+    text-align:center;padding:7px 16px;
+  }
+  .demo-bar b{color:var(--yellow);font-weight:700}
+
+  /* ---------- 헤더 ---------- */
+  header.site{
+    position:sticky;top:0;z-index:50;
+    background:rgba(255,248,241,.86);
+    backdrop-filter:saturate(150%) blur(12px);
+    -webkit-backdrop-filter:saturate(150%) blur(12px);
+    border-bottom:1px solid rgba(239,226,213,.8);
+  }
+  .nav{display:flex;align-items:center;gap:24px;height:68px}
+  .brand{display:flex;align-items:center;gap:10px;text-decoration:none;font-weight:800;font-size:19px;letter-spacing:-.02em}
+  .brand .mark{
+    width:38px;height:38px;border-radius:12px;display:grid;place-items:center;font-size:19px;
+    background:linear-gradient(145deg,#FFD9A8,#FFB27A);box-shadow:inset 0 0 0 1px rgba(255,255,255,.6),var(--shadow-sm);
+  }
+  .brand small{display:block;font-size:11px;font-weight:600;color:var(--ink-faint);letter-spacing:0;line-height:1.2}
+  .nav .links{display:flex;gap:22px;margin-left:auto;font-size:14.5px;font-weight:600}
+  .nav .links a{text-decoration:none;color:var(--ink-soft);padding:6px 2px;border-bottom:2px solid transparent}
+  .nav .links a:hover{color:var(--ink);border-bottom-color:var(--accent)}
+  .chip-demo{
+    display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:700;color:var(--accent-dark);
+    background:var(--accent-soft);border:1px dashed #F3B79F;padding:4px 10px;border-radius:999px;white-space:nowrap;
+  }
+
+  /* ---------- 히어로 ---------- */
+  .hero{position:relative;overflow:hidden;padding:64px 0 40px}
+  .hero::before,.hero::after{content:"";position:absolute;border-radius:50%;filter:blur(50px);opacity:.55;pointer-events:none}
+  .hero::before{width:420px;height:420px;background:#FFD9BC;top:-160px;right:-80px}
+  .hero::after{width:360px;height:360px;background:#FFE9B8;bottom:-220px;left:-120px}
+  .hero .wrap{position:relative}
+  .hero-grid{display:grid;grid-template-columns:1.08fr .92fr;gap:48px;align-items:center}
+  .hero-copy{min-width:0}
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:8px;font-size:12.5px;font-weight:800;letter-spacing:.08em;
+    color:var(--green);background:var(--green-soft);padding:7px 14px;border-radius:999px;
+  }
+  .hero h1{
+    font-size:clamp(32px,5.2vw,58px);line-height:1.16;letter-spacing:-.035em;margin:20px 0 0;font-weight:800;
+    max-width:15em;
+  }
+  .hero h1 .hl{position:relative;white-space:nowrap;color:var(--accent-dark)}
+  .hero h1 .hl::after{
+    content:"";position:absolute;left:-3px;right:-3px;bottom:0;height:11px;border-radius:5px;
+    background:#FFCB8C;opacity:.85;z-index:-1;
+  }
+  .hero p.lead{font-size:clamp(15px,1.6vw,17.5px);color:var(--ink-soft);max-width:38em;margin:18px 0 0}
+  .hero .cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
+  .btn{
+    display:inline-flex;align-items:center;justify-content:center;gap:8px;
+    padding:14px 24px;border-radius:14px;font-weight:700;font-size:15px;text-decoration:none;border:0;cursor:pointer;
+    transition:transform .15s ease,box-shadow .2s ease,background .2s ease;
+  }
+  .btn-primary{background:var(--accent);color:#fff;box-shadow:0 10px 22px -10px rgba(240,103,58,.8)}
+  .btn-primary:hover{background:var(--accent-dark);transform:translateY(-1px)}
+  .btn-ghost{background:#fff;color:var(--ink);box-shadow:inset 0 0 0 1px var(--line),var(--shadow-sm)}
+  .btn-ghost:hover{box-shadow:inset 0 0 0 1px #E2CFBE,var(--shadow-md);transform:translateY(-1px)}
+  .facts{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:44px;max-width:900px}
+
+  /* 아빠 메모 카드 (히어로 오른쪽) */
+  .hero-visual{display:flex;justify-content:center;align-items:center;padding:10px 0}
+  .note-stack{position:relative;width:min(100%,372px)}
+  .note-back{
+    position:absolute;inset:14px -12px -16px 14px;background:linear-gradient(150deg,#FFE7D2,#FFDCC0);
+    border-radius:20px;transform:rotate(3.2deg);border:1px solid #F3D6BE;
+  }
+  .note-card{
+    position:relative;background:#fff;border-radius:20px;padding:26px 26px 22px;
+    border:1px solid #F4E4D4;box-shadow:var(--shadow-lg);transform:rotate(-1.6deg);
+  }
+  .note-card::before{
+    content:"";position:absolute;top:-11px;left:50%;transform:translateX(-50%) rotate(-4deg);
+    width:92px;height:24px;border-radius:3px;background:rgba(255,205,125,.8);
+    box-shadow:0 1px 4px rgba(120,80,40,.15);
+  }
+  .note-head{display:flex;align-items:center;gap:8px;font-size:12px;font-weight:800;letter-spacing:.06em;color:var(--ink-faint)}
+  .note-card h2{font-size:18px;margin:8px 0 14px;letter-spacing:-.03em;line-height:1.35}
+  .note-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:11px}
+  .note-list li{display:flex;gap:10px;align-items:flex-start;font-size:14px;line-height:1.5;color:#4A3B31}
+  .note-list .e{font-size:17px;line-height:1.25;flex:none}
+  .note-list b{font-weight:700}
+  .note-list small{display:block;color:var(--ink-faint);font-size:12px;font-weight:600}
+  .note-foot{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:18px;padding-top:14px;border-top:1px dashed #EEDCCB;font-size:12px;color:var(--ink-faint)}
+  .note-foot .sign{font-weight:700;color:var(--accent-dark)}
+  .fact{background:rgba(255,255,255,.72);border:1px solid var(--line);border-radius:16px;padding:14px 16px}
+  .fact b{display:block;font-size:15px;letter-spacing:-.01em}
+  .fact span{font-size:12.5px;color:var(--ink-faint)}
+
+  /* ---------- 필터 ---------- */
+  .filters{
+    position:sticky;top:68px;z-index:40;
+    background:rgba(255,248,241,.92);
+    backdrop-filter:saturate(160%) blur(14px);
+    -webkit-backdrop-filter:saturate(160%) blur(14px);
+    padding:18px 0 14px;border-bottom:1px solid var(--line);
+  }
+  .filter-row{display:flex;flex-wrap:wrap;align-items:center;gap:10px}
+  .filter-row + .filter-row{margin-top:12px}
+  .filter-label{font-size:12px;font-weight:800;color:var(--ink-faint);letter-spacing:.08em;margin-right:4px}
+  .tabs{display:flex;flex-wrap:wrap;gap:8px}
+  .tab{
+    appearance:none;border:1px solid var(--line);background:#fff;color:var(--ink-soft);
+    padding:9px 16px;border-radius:999px;font-size:14px;font-weight:700;cursor:pointer;
+    display:inline-flex;align-items:center;gap:6px;transition:all .18s ease;
+  }
+  .tab:hover{border-color:#E0CBB8;color:var(--ink)}
+  .tab[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:#fff;box-shadow:var(--shadow-sm)}
+  .tab .num{font-size:11.5px;font-weight:700;opacity:.6}
+  .tab[data-age="4"][aria-pressed="true"]{background:var(--accent);border-color:var(--accent)}
+  .tab[data-age="7"][aria-pressed="true"]{background:var(--blue);border-color:var(--blue)}
+  .tab[data-age="together"][aria-pressed="true"]{background:var(--green);border-color:var(--green)}
+  .search{
+    margin-left:auto;display:flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--line);
+    border-radius:999px;padding:8px 8px 8px 16px;min-width:min(320px,100%);flex:1 1 240px;max-width:360px;
+    box-shadow:var(--shadow-sm);
+  }
+  .search:focus-within{border-color:#E9B79F;box-shadow:0 0 0 4px rgba(240,103,58,.12)}
+  .search input{
+    border:0;outline:0;background:transparent;font:inherit;font-size:14px;color:var(--ink);flex:1;min-width:0;padding:4px 0;
+  }
+  .search input::placeholder{color:var(--ink-faint)}
+  .search input::-webkit-search-decoration,
+  .search input::-webkit-search-cancel-button,
+  .search input::-webkit-search-results-button{ -webkit-appearance:none; appearance:none; display:none; }
+  .search .ico{font-size:15px;opacity:.55}
+  .search .clear{
+    border:0;background:#F3EAE1;color:var(--ink-soft);width:26px;height:26px;border-radius:50%;
+    cursor:pointer;line-height:1;font-size:14px;display:none;place-items:center;flex:none;
+  }
+  .search.has-value .clear{display:grid}
+
+  /* ---------- 큐레이션 ---------- */
+  main{padding:44px 0 20px}
+  #curation,#principles,#about-money,#top{scroll-margin-top:150px}
+  .section-head{display:flex;flex-wrap:wrap;align-items:flex-end;gap:10px 18px;margin-bottom:22px}
+  .section-head h2{font-size:clamp(22px,2.6vw,28px);margin:0;letter-spacing:-.03em}
+  .section-head p{margin:0;color:var(--ink-soft);font-size:14.5px}
+  .count{margin-left:auto;font-size:13px;color:var(--ink-faint);font-weight:600}
+  .count b{color:var(--ink);font-size:15px}
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+
+  .card{
+    background:var(--card);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;
+    display:flex;flex-direction:column;box-shadow:var(--shadow-sm);
+    transition:transform .2s ease,box-shadow .25s ease,border-color .2s ease;
+  }
+  .card:hover{transform:translateY(-3px);box-shadow:var(--shadow-md);border-color:#E7D3C1}
+  .card[hidden]{display:none}
+  .thumb{
+    position:relative;aspect-ratio:16/10;display:grid;place-items:center;font-size:76px;line-height:1;
+    background:linear-gradient(140deg,#FFE9D5,#FFD3AE);
+    overflow:hidden;
+  }
+  .thumb img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+  .thumb.cat-outing{background:linear-gradient(140deg,#E2F1E7,#C5E3D2)}
+  .thumb.cat-gear{background:linear-gradient(140deg,#E5EFF8,#CADFEF)}
+  .badges{position:absolute;top:12px;left:12px;right:12px;display:flex;flex-wrap:wrap;gap:6px;z-index:2}
+  .badge{
+    font-size:11.5px;font-weight:800;padding:5px 10px;border-radius:999px;background:rgba(255,255,255,.94);
+    box-shadow:var(--shadow-sm);letter-spacing:-.01em;
+  }
+  .badge.age-4{color:var(--accent-dark);background:#FFF1EA}
+  .badge.age-7{color:var(--blue);background:#EAF2FA}
+  .badge.age-together{color:var(--green);background:#E8F4EC}
+  .badge.cat{margin-left:auto;color:var(--ink-soft)}
+  .card-body{padding:18px 20px 20px;display:flex;flex-direction:column;flex:1;gap:12px}
+  .card h3{font-size:17.5px;line-height:1.4;margin:0;letter-spacing:-.02em}
+  .price{font-size:13px;color:var(--ink-faint);font-weight:600;margin-top:-4px}
+  .verdict{
+    margin:0;padding:12px 14px 12px 16px;border-left:3px solid var(--accent);background:#FFF9F4;
+    border-radius:0 12px 12px 0;font-size:14.5px;font-weight:600;color:#4A3B31;line-height:1.55;
+  }
+  .verdict em{font-style:normal;display:block;font-size:11px;font-weight:800;letter-spacing:.06em;color:var(--accent-dark);margin-bottom:2px}
+  .detail{font-size:13.5px;color:var(--ink-soft);line-height:1.62}
+  .detail b{display:block;font-size:12px;font-weight:800;color:var(--ink);letter-spacing:.02em;margin-bottom:3px}
+  .detail.caution b{color:#9A5B2E}
+  .detail + .detail{margin-top:0}
+  .tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:auto;padding-top:2px}
+  .tag{font-size:11.5px;color:var(--ink-faint);background:#F8F1EA;border-radius:8px;padding:3px 8px;font-weight:600}
+  .go{
+    margin-top:14px;display:flex;align-items:center;justify-content:center;gap:7px;
+    background:var(--ink);color:#fff;text-decoration:none;border:0;cursor:pointer;
+    padding:12px 16px;border-radius:12px;font-weight:700;font-size:14px;transition:background .18s ease,transform .15s ease;
+  }
+  .go:hover{background:var(--accent);transform:translateY(-1px)}
+  .go small{font-weight:600;opacity:.75;font-size:11.5px}
+
+  .empty{
+    grid-column:1/-1;text-align:center;padding:64px 20px;border:1.5px dashed var(--line);border-radius:var(--radius);
+    background:rgba(255,255,255,.6);
+  }
+  .empty .big{font-size:38px}
+  .empty h3{margin:10px 0 4px;font-size:18px}
+  .empty p{margin:0 0 16px;color:var(--ink-soft);font-size:14px}
+  .empty[hidden]{display:none}
+
+  /* ---------- 운영 원칙 · 수익화 안내 ---------- */
+  .principles{margin:56px 0 0;padding:40px 0 8px;border-top:1px solid var(--line)}
+  .p-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:22px}
+  .p-card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:22px;box-shadow:var(--shadow-sm)}
+  .p-card .ico{font-size:24px}
+  .p-card h3{font-size:16px;margin:10px 0 6px;letter-spacing:-.02em}
+  .p-card p{margin:0;font-size:13.5px;color:var(--ink-soft);line-height:1.62}
+
+  .note{
+    margin:30px 0 0;background:linear-gradient(135deg,#FFF3E8,#FFEADB);border:1px solid #F5D7C0;
+    border-radius:18px;padding:22px 24px;display:flex;gap:16px;align-items:flex-start;
+  }
+  .note .ico{font-size:22px;line-height:1.2}
+  .note h3{margin:0 0 6px;font-size:15px}
+  .note p{margin:0;font-size:13.5px;color:#6B5344;line-height:1.65}
+  .note code{background:#fff;border:1px solid #F0DAC8;border-radius:6px;padding:2px 6px;font-size:12.5px}
+
+  /* ---------- 푸터 ---------- */
+  footer.site{margin-top:56px;background:#2B2622;color:#D8CCC2;padding:46px 0 34px;font-size:13.5px}
+  footer.site .f-top{display:flex;flex-wrap:wrap;gap:28px;justify-content:space-between}
+  footer.site .brand{color:#fff}
+  footer.site .brand small{color:#A99C91}
+  footer.site .f-desc{max-width:34em;color:#B4A69B;margin:12px 0 0;font-size:13px;line-height:1.7}
+  footer.site .f-links{display:flex;flex-direction:column;gap:8px;min-width:150px}
+  footer.site .f-links b{color:#fff;font-size:13px;margin-bottom:2px}
+  footer.site .f-links a{color:#B4A69B;text-decoration:none}
+  footer.site .f-links a:hover{color:var(--yellow)}
+  .disclosure{
+    margin:32px 0 0;padding:16px 18px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);
+    border-radius:12px;font-size:12.5px;line-height:1.7;color:#BEB0A5;
+  }
+  .disclosure b{color:#fff}
+  footer.site .copy{
+    margin-top:24px;padding-top:18px;border-top:1px solid rgba(255,255,255,.1);
+    display:flex;flex-wrap:wrap;gap:10px;justify-content:space-between;font-size:12px;color:#8F8278;
+  }
+
+  /* ---------- 토스트 ---------- */
+  .toast{
+    position:fixed;left:50%;bottom:26px;transform:translate(-50%,20px);z-index:100;
+    background:var(--ink);color:#fff;padding:12px 18px;border-radius:12px;font-size:13.5px;
+    box-shadow:var(--shadow-lg);opacity:0;pointer-events:none;transition:opacity .25s ease,transform .25s ease;
+    max-width:min(92vw,460px);text-align:center;
+  }
+  .toast.show{opacity:1;transform:translate(-50%,0)}
+
+  /* ---------- 반응형 ---------- */
+  @media (max-width:1000px){
+    .grid{grid-template-columns:repeat(2,1fr)}
+    .facts{max-width:100%}
+    .hero-grid{grid-template-columns:1fr;gap:36px}
+    .hero-visual{display:none}
+  }
+  @media (max-width:760px){
+    .wrap{width:min(100% - 28px,var(--max))}
+    .nav{height:60px;gap:12px}
+    .nav .links{display:none}
+    .nav .chip-demo{margin-left:auto}
+    .hero{padding:40px 0 26px}
+    .hero h1{max-width:100%}
+    .facts{grid-template-columns:1fr;gap:8px;margin-top:28px}
+    .fact{display:flex;gap:10px;align-items:baseline;padding:11px 14px}
+    .fact b{font-size:14px}
+    .filters{top:60px;padding:14px 0 12px}
+    .filter-row{gap:8px}
+    .filter-label{width:100%;margin-bottom:-2px}
+    .tabs{gap:6px;width:100%}
+    .tab{padding:8px 12px;font-size:13px;flex:1 1 auto;justify-content:center}
+    .search{max-width:none;margin-left:0;order:9;width:100%}
+    main{padding:28px 0 10px}
+    #curation,#principles,#about-money,#top{scroll-margin-top:190px}
+    .grid{grid-template-columns:1fr;gap:16px}
+    .section-head .count{margin-left:0;width:100%}
+    .p-grid{grid-template-columns:1fr}
+    .principles{margin-top:40px;padding-top:30px}
+    .note{flex-direction:column;gap:8px}
+    footer.site{padding:34px 0 26px}
+  }
+  @media (prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto}
+    *{transition:none!important;animation:none!important}
+  }
+</style>
+</head>
+<body>
+
+<!-- 시안 안내 띠: 실제 배포할 때는 이 한 줄을 지우면 됩니다 -->
+<div class="demo-bar">🧪 <b>시안 v1</b> · 카드 6개와 가격·링크는 예시입니다. 내 후기와 제휴 링크로 바꿔 쓰세요.</div>
+
+<header class="site">
+  <div class="wrap nav">
+    <a class="brand" href="#top">
+      <span class="mark" aria-hidden="true">🧸</span>
+      <span>도도아빠의 일상<small>4살·7살 아빠의 실전 육아 노트</small></span>
+    </a>
+    <nav class="links" aria-label="주요 메뉴">
+      <a href="#curation">큐레이션</a>
+      <a href="#principles">운영 원칙</a>
+      <a href="#about-money">수익화 안내</a>
+    </nav>
+    <span class="chip-demo">DEMO</span>
+  </div>
+</header>
+
+<section class="hero" id="top">
+  <div class="wrap">
+    <div class="hero-grid">
+      <div class="hero-copy">
+        <span class="eyebrow">4살 · 7살 형제 아빠의 기록</span>
+        <h1>애 둘 아빠가<br><span class="hl">직접 사보고 가본 것</span>만<br>모았습니다</h1>
+        <p class="lead">
+          장난감은 최소 2주 굴려 보고, 나들이는 실제로 다녀온 뒤에 씁니다.
+          형이랑 동생이 같이 놀 수 있는지가 첫 번째 기준이고, 단점은 빼지 않고 그대로 적어요.
+          광고보다 우리 집 후기가 먼저인 육아 큐레이션, 도도아빠의 일상입니다.
+        </p>
+        <div class="cta">
+          <a class="btn btn-primary" href="#curation">이번 주 추천 보기 →</a>
+          <a class="btn btn-ghost" href="#principles">어떻게 고르나요?</a>
+        </div>
+      </div>
+
+      <!-- 히어로 오른쪽 메모 카드: 내용은 자유롭게 바꾸세요 -->
+      <aside class="hero-visual" aria-label="아빠의 이번 주 메모">
+        <div class="note-stack">
+          <div class="note-back" aria-hidden="true"></div>
+          <div class="note-card">
+            <div class="note-head">✍️ 아빠의 이번 주 메모</div>
+            <h2>주말 계획, 아직 안 짰다면</h2>
+            <ul class="note-list">
+              <li><span class="e">🌳</span><span><b>화성 융릉·건릉 숲길</b><small>유모차 OK · 2시간 코스 · 아이 무료</small></span></li>
+              <li><span class="e">🔬</span><span><b>비 오면 과천과학관</b><small>4살·7살 둘 다 놀 게 있음</small></span></li>
+              <li><span class="e">🚗</span><span><b>요즘 최애 장난감</b><small>듀플로 10474 · 형이 먼저 달려듦</small></span></li>
+            </ul>
+            <div class="note-foot"><span>2026. 11. 26 기준</span><span class="sign">— 4살·7살 아빠</span></div>
+          </div>
+        </div>
+      </aside>
+    </div>
+
+    <div class="facts">
+      <div class="fact"><b>직접 써본 것만</b><span>리뷰는 2주 이상, 나들이는 방문 후</span></div>
+      <div class="fact"><b>형제 같이 기준</b><span>4살·7살이 함께 노는지를 먼저 봅니다</span></div>
+      <div class="fact"><b>단점도 그대로</b><span>안 맞는 집은 안 맞다고 씁니다</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ▼▼ 필터 : 카테고리 / 연령 / 검색 -->
+<section class="filters" aria-label="큐레이션 필터">
+  <div class="wrap">
+    <div class="filter-row">
+      <span class="filter-label">카테고리</span>
+      <div class="tabs" id="catTabs" role="group" aria-label="카테고리 선택">
+        <button class="tab" data-cat="all" aria-pressed="true">전체 <span class="num" data-count="all"></span></button>
+        <button class="tab" data-cat="toy" aria-pressed="false">장난감 <span class="num" data-count="toy"></span></button>
+        <button class="tab" data-cat="outing" aria-pressed="false">나들이 <span class="num" data-count="outing"></span></button>
+        <button class="tab" data-cat="gear" aria-pressed="false">육아템 <span class="num" data-count="gear"></span></button>
+      </div>
+    </div>
+    <div class="filter-row">
+      <span class="filter-label">연령</span>
+      <div class="tabs" id="ageTabs" role="group" aria-label="연령 선택">
+        <button class="tab" data-age="all" aria-pressed="true">전체</button>
+        <button class="tab" data-age="4" aria-pressed="false">4살 추천</button>
+        <button class="tab" data-age="7" aria-pressed="false">7살 추천</button>
+        <button class="tab" data-age="together" aria-pressed="false">형제 같이</button>
+      </div>
+      <div class="search" id="searchBox">
+        <span class="ico" aria-hidden="true">🔍</span>
+        <label for="q" class="sr-only" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">키워드 검색</label>
+        <input id="q" type="search" placeholder="키워드로 찾기 (예: 카시트, 실내, 블록)" autocomplete="off" />
+        <button class="clear" id="clearQ" type="button" aria-label="검색어 지우기">✕</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<main>
+  <div class="wrap">
+    <div class="section-head">
+      <h2 id="curation">아빠표 큐레이션</h2>
+      <p>4살·7살 우리 집 기준으로 고른 6가지</p>
+      <p class="count" aria-live="polite"><b id="shown">6</b> / 6개</p>
+    </div>
+
+    <div class="grid" id="grid"><!-- 카드는 script의 ITEMS 배열에서 자동 생성됩니다 --></div>
+    <div class="empty" id="empty" hidden>
+      <div class="big">🧸</div>
+      <h3>조건에 맞는 큐레이션이 아직 없어요</h3>
+      <p>다른 카테고리나 연령을 골라 보시겠어요?</p>
+      <button class="btn btn-ghost" id="resetBtn" type="button">필터 초기화</button>
+    </div>
+
+    <!-- ▼ 운영 원칙 -->
+    <section class="principles" id="principles">
+      <div class="section-head">
+        <h2>이 사이트는 이렇게 만들어요</h2>
+        <p>믿고 누르실 수 있게, 기준을 먼저 적어 둡니다</p>
+      </div>
+      <div class="p-grid">
+        <div class="p-card">
+          <div class="ico">🛒</div>
+          <h3>직접 사서 써본 것만</h3>
+          <p>협찬만 받고 쓴 리뷰는 올리지 않습니다. 장난감은 최소 2주, 육아템은 한 달 이상 써 보고 남깁니다.</p>
+        </div>
+        <div class="p-card">
+          <div class="ico">👦🏻👶🏻</div>
+          <h3>형제 같이가 1순위</h3>
+          <p>4살과 7살이 각자 다른 걸 원할 때가 많아요. 둘이 같이 앉아 있을 수 있는지, 동생이 다칠 요소는 없는지를 먼저 봅니다.</p>
+        </div>
+        <div class="p-card">
+          <div class="ico">✍️</div>
+          <h3>단점도 그대로</h3>
+          <p>“무조건 좋아요”는 쓰지 않습니다. 비싼 값어치를 못 하는 순간, 시끄러운 제품, 치우기 힘든 것도 그대로 적어요.</p>
+        </div>
+      </div>
+
+      <div class="note" id="about-money">
+        <span class="ico" aria-hidden="true">💡</span>
+        <div>
+          <h3>수익화·운영 안내</h3>
+          <p>
+            이 사이트는 쿠팡 파트너스 등 제휴 마케팅 활동의 일환으로 일정액의 수수료를 제공받을 수 있습니다.
+            링크를 눌러 구매하셔도 <b>결제 금액은 똑같고</b>, 그 수수료가 사이트 운영비(아이 간식값)로 쓰입니다.
+            가격·재고는 실시간으로 바뀌므로 <b>구매 전 링크에서 최종 금액을 꼭 확인</b>해 주세요.
+            <br>문의·제안: <code>hello@example.com</code> (시안용 주소입니다)
+          </p>
+        </div>
+      </div>
+    </section>
+  </div>
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <div class="f-top">
+      <div>
+        <a class="brand" href="#top">
+          <span class="mark" aria-hidden="true">🧸</span>
+          <span>도도아빠의 일상<small>4살·7살 아빠의 실전 육아 노트</small></span>
+        </a>
+        <p class="f-desc">
+          4살, 7살 두 아들을 키우는 아빠가 직접 사보고 다녀온 것만 골라 기록합니다.
+          육아로 지친 하루에 “이건 괜찮더라” 한 줄을 보태는 게 목표예요.
+        </p>
+      </div>
+      <div class="f-links">
+        <b>둘러보기</b>
+        <a href="#curation">큐레이션 전체</a>
+        <a href="#principles">운영 원칙</a>
+        <a href="#about-money">수익화 안내</a>
+      </div>
+      <div class="f-links">
+        <b>알림</b>
+        <a href="#top">주말 나들이 소식 (준비 중)</a>
+        <a href="#top">제휴·협업 문의</a>
+        <a href="#top">개인정보처리방침</a>
+      </div>
+    </div>
+
+    <div class="disclosure">
+      <b>공정거래위원회 고지</b> — 이 포스팅은 제휴 마케팅 활동의 일환으로 일정액의 수수료를 제공받을 수 있습니다.
+      쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.
+      상품 가격과 재고는 판매처 사정에 따라 달라질 수 있으며, 본 사이트의 정보는 구매 결정을 돕기 위한 참고 자료입니다.
+    </div>
+    <div class="copy">
+      <span>© 2026 도도아빠의 일상. All rights reserved.</span>
+      <span>시안 v1 · made by 아빠</span>
+    </div>
+  </div>
+</footer>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+/* ============================================================
+   1) 카드 데이터 — 여기만 고치면 사이트 내용이 바뀝니다.
+   ------------------------------------------------------------
+   cat      : 'toy' | 'outing' | 'gear'
+   ages     : '4' | '7' | 'together'  (여러 개 가능)
+   price    : 카드에 보이는 가격 문구 (자유롭게)
+   verdict  : 아빠의 실전 한줄평
+   reason   : 추천 이유
+   caution  : 주의할 점
+   tags     : 검색에도 걸리는 키워드
+   url      : ★ 내 제휴 링크를 여기에 넣으세요 (예: 쿠팡 파트너스 링크)
+   image    : (선택) 상품 사진 경로/URL. 비우면 이모지 썸네일이 나옵니다.
+   ============================================================ */
+const ITEMS = [
+  {
+    id: 'duplo-10474',
+    cat: 'toy',
+    ages: ['4', 'together'],
+    emoji: '🚗',
+    title: '레고 듀플로 10474 나의 첫 자동차',
+    price: '정가 29,900원 · 할인가 24,200원 (2026.11 확인)',
+    verdict: '브릭 뜯고 붙이는 손맛이 4살한테 딱. 형이 바퀴만 달아줘도 둘이 30분은 갑니다.',
+    reason: '42피스라 블록 놀이를 처음 시작할 때 부담이 없고, 완성품(자동차·헬리콥터)이 들어 있어 조립을 못 해도 바로 놀 수 있어요. 듀플로는 7살 형이 같이 놀아도 안 아까운 내구성입니다.',
+    caution: '피스 수가 적어 7살에겐 금방 질릴 수 있어요. 형 몫으로는 다른 세트를 하나 더 두는 걸 추천합니다. 정가 대비 할인 폭이 커서 급하지 않다면 세일 때 사는 게 낫습니다.',
+    tags: ['블록', '조립', '실내놀이', '입문', '레고'],
+    url: '#',   // ← 제휴 링크로 교체
+    image: ''   // ← 상품 이미지 URL (선택)
+  },
+  {
+    id: 'rummikub',
+    cat: 'toy',
+    ages: ['7'],
+    emoji: '🎲',
+    title: '루미큐브 오리지널 클래식 (보드게임)',
+    price: '정가 44,000원 · 할인가 3만원대 (2026.11 확인)',
+    verdict: '규칙 설명 5분이면 끝나는데, 7살이 진짜로 이깁니다. 지는 날엔 화도 내요.',
+    reason: '숫자와 색을 분류하고 순서를 만드는 놀이라 7살 수학 감각에 좋아요. 타일이라 밟혀도 안 아프고, 정리함에 쏙 들어가 치우기도 쉽습니다.',
+    caution: '타일이 작아 4살 동생 입에 들어갈 수 있어요. 동생이 있을 땐 반드시 어른이 같이 앉아서, 아니면 동생 낮잠 시간에 하세요. 제조사 표기는 7세 이상이지만 판매처에 따라 만 8세+로 적힌 곳도 있으니 상자 표기를 확인하세요.',
+    tags: ['보드게임', '숫자', '사고력', '7세', '실내놀이'],
+    url: '#',
+    image: ''
+  },
+  {
+    id: 'yungneung',
+    cat: 'outing',
+    ages: ['4', '7', 'together'],
+    emoji: '🌳',
+    title: '화성 융릉·건릉 숲길 (주말 나들이)',
+    price: '어른 1,000원 · 아이 무료 · 주차 무료',
+    verdict: '유모차로 2시간, 그늘 진 숲길. 어른은 1,000원, 아이들은 무료입니다.',
+    reason: '평지 위주 산책로에 유모차 대여까지 되어 4살은 태우고, 7살은 걸으며 같이 움직이기 좋아요. 수유실과 화장실이 매표소 쪽에 있고, 3.7km 숲길이 이어져 2시간이 금방 갑니다.',
+    caution: '숲길은 5~11월에만 열려요(2026년 가을은 10/1~11/29, 11월은 16:30 마감). 월요일 휴무, 경내는 대부분 비포장에 경사 구간이 있어요. 돗자리·도시락 반입이 제한되니 간식만 챙기세요.',
+    tags: ['경기권', '화성', '유모차', '산책', '세계유산'],
+    url: '#',
+    image: ''
+  },
+  {
+    id: 'gwacheon',
+    cat: 'outing',
+    ages: ['4', '7', 'together'],
+    emoji: '🔬',
+    title: '국립과천과학관 어린이탐구관',
+    price: '성인 4,000원 · 7살 2,000원 · 4살 무료 (탐구관 별도)',
+    verdict: '비 오는 주말의 정답. 4살도 7살도 각자 놀 게 있어서 싸울 일이 없어요.',
+    reason: '연령별로 체험 구역이 나뉘어 있어 형은 형 것, 동생은 동생 것을 하다가 중간에 만납니다. 실내라 날씨 영향을 안 받는 것도 큰 장점.',
+    caution: '주말 11시 이후 어린이탐구관은 대기가 길어요. 개장하자마자 들어가거나 평일 오후를 노리세요. 주차장은 10시에 차기 시작합니다. 매주 월요일 휴관입니다.',
+    tags: ['경기권', '과천', '실내', '비오는날', '체험', '과학관'],
+    url: '#',
+    image: ''
+  },
+  {
+    id: 'car-seat',
+    cat: 'gear',
+    ages: ['4', 'together'],
+    emoji: '🚙',
+    title: '360도 회전형 카시트 (3~7세)',
+    price: '40만원대~70만원대 · 모델별 차이',
+    verdict: '4살 등·하원 15분이 전쟁이었는데, 돌려서 태우니 허리부터 살았습니다.',
+    reason: '회전식이라 좁은 주차장에서 아이를 안고 들어 올리지 않아도 돼요. 3~7세까지 쓰는 모델이 많아 형이 쓴 걸 동생이 물려받기도 좋습니다. ISOFIX 차량이면 설치도 5분이면 끝나요.',
+    caution: '무겁고(9~10kg) 부피가 커서 차종에 따라 조수석을 많이 밀어야 해요. 차량에 ISOFIX가 있는지 먼저 확인하세요. 중고는 사고 이력 확인이 어려우니 정품 등록 여부를 꼭 보세요.',
+    tags: ['카시트', '외출', '차량', '4세', '안전'],
+    url: '#',
+    image: ''
+  },
+  {
+    id: 'portable-potty',
+    cat: 'gear',
+    ages: ['4'],
+    emoji: '🧻',
+    title: '접이식 휴대 변기 + 변기 커버',
+    price: '1만~2만원대',
+    verdict: '차에 하나 두면 나들이가 편해집니다. 화장실 급할 때 이만한 게 없어요.',
+    reason: '4살은 아직 “참기”가 안 돼서 이동 중 화장실 이슈가 잦아요. 접으면 A4 크기라 트렁크 구석에 그냥 둘 수 있고, 위생 커버는 공공 화장실에서도 씁니다.',
+    caution: '변기 위에 얹기만 하는 제품은 아이가 흔들리면 불안해해요. 다리 지지대가 있는 접이식으로 고르세요.',
+    tags: ['외출템', '화장실', '차량', '필수템', '4세'],
+    url: '#',
+    image: ''
+  }
+];
+
+const CAT_LABEL = { toy: '장난감', outing: '나들이', gear: '육아템' };
+const AGE_LABEL = { '4': '4살 추천', '7': '7살 추천', together: '형제 같이' };
+
+/* ============================================================
+   2) 카드 렌더링
+   ============================================================ */
+const grid = document.getElementById('grid');
+const emptyBox = document.getElementById('empty');
+const shownEl = document.getElementById('shown');
+
+function esc(s){
+  return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+
+function cardHTML(item){
+  const thumbClass = 'thumb cat-' + item.cat;
+  const img = item.image
+    ? `<img src="${esc(item.image)}" alt="${esc(item.title)}" loading="lazy" />`
+    : `<span aria-hidden="true">${item.emoji || '🧸'}</span>`;
+  const ageBadges = item.ages
+    .map(a => `<span class="badge age-${esc(a)}">${esc(AGE_LABEL[a] || a)}</span>`)
+    .join('');
+  return `
+  <article class="card" data-cat="${esc(item.cat)}" data-ages="${item.ages.join(' ')}"
+           data-search="${esc([item.title, item.verdict, item.reason, item.caution, item.price, item.tags.join(' '), CAT_LABEL[item.cat]].join(' ').toLowerCase())}">
+    <div class="${thumbClass}">
+      <div class="badges">${ageBadges}<span class="badge cat">${esc(CAT_LABEL[item.cat])}</span></div>
+      ${img}
+    </div>
+    <div class="card-body">
+      <h3>${esc(item.title)}</h3>
+      <p class="price">${esc(item.price)}</p>
+      <blockquote class="verdict"><em>아빠 한줄평</em>${esc(item.verdict)}</blockquote>
+      <p class="detail"><b>왜 추천하냐면</b>${esc(item.reason)}</p>
+      <p class="detail caution"><b>주의할 점</b>${esc(item.caution)}</p>
+      <div class="tags">${item.tags.map(t => `<span class="tag">#${esc(t)}</span>`).join('')}</div>
+      <a class="go" href="${esc(item.url || '#')}" data-affiliate="${esc(item.id)}"
+         rel="nofollow sponsored noopener" target="_blank">최저가·상세 보기 <small>↗</small></a>
+    </div>
+  </article>`;
+}
+
+grid.innerHTML = ITEMS.map(cardHTML).join('');
+const cards = Array.from(grid.querySelectorAll('.card'));
+
+/* 카테고리별 개수 표시 */
+document.querySelectorAll('[data-count]').forEach(el => {
+  const key = el.getAttribute('data-count');
+  el.textContent = key === 'all' ? ITEMS.length : ITEMS.filter(i => i.cat === key).length;
+});
+
+/* ============================================================
+   3) 필터 동작
+   ============================================================ */
+const state = { cat: 'all', age: 'all', q: '' };
+const catTabs = document.getElementById('catTabs');
+const ageTabs = document.getElementById('ageTabs');
+const qInput = document.getElementById('q');
+const searchBox = document.getElementById('searchBox');
+
+function setPressed(group, attr, value){
+  group.querySelectorAll('.tab').forEach(btn => {
+    btn.setAttribute('aria-pressed', String(btn.getAttribute(attr) === value));
+  });
+}
+
+function applyFilter(){
+  const q = state.q.trim().toLowerCase();
+  let visible = 0;
+  cards.forEach(card => {
+    const catOk = state.cat === 'all' || card.dataset.cat === state.cat;
+    const ageOk = state.age === 'all' || card.dataset.ages.split(' ').includes(state.age);
+    const qOk = !q || card.dataset.search.includes(q);
+    const show = catOk && ageOk && qOk;
+    card.hidden = !show;
+    if (show) visible++;
+  });
+  shownEl.textContent = visible;
+  emptyBox.hidden = visible !== 0;
+  grid.style.display = visible === 0 ? 'none' : '';
+}
+
+catTabs.addEventListener('click', e => {
+  const btn = e.target.closest('.tab');
+  if (!btn) return;
+  state.cat = btn.dataset.cat;
+  setPressed(catTabs, 'data-cat', state.cat);
+  applyFilter();
+});
+
+ageTabs.addEventListener('click', e => {
+  const btn = e.target.closest('.tab');
+  if (!btn) return;
+  state.age = btn.dataset.age;
+  setPressed(ageTabs, 'data-age', state.age);
+  applyFilter();
+});
+
+qInput.addEventListener('input', () => {
+  state.q = qInput.value;
+  searchBox.classList.toggle('has-value', qInput.value.length > 0);
+  applyFilter();
+});
+
+document.getElementById('clearQ').addEventListener('click', () => {
+  qInput.value = ''; state.q = '';
+  searchBox.classList.remove('has-value');
+  qInput.focus();
+  applyFilter();
+});
+
+document.getElementById('resetBtn').addEventListener('click', () => {
+  state.cat = 'all'; state.age = 'all'; state.q = '';
+  qInput.value = ''; searchBox.classList.remove('has-value');
+  setPressed(catTabs, 'data-cat', 'all');
+  setPressed(ageTabs, 'data-age', 'all');
+  applyFilter();
+});
+
+applyFilter();
+
+/* ============================================================
+   4) 제휴 링크 버튼 — url이 '#'이면 시안 안내 토스트
+   ============================================================ */
+const toast = document.getElementById('toast');
+let toastTimer = null;
+function showToast(msg){
+  toast.textContent = msg;
+  toast.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => toast.classList.remove('show'), 2800);
+}
+
+grid.addEventListener('click', e => {
+  const link = e.target.closest('a.go');
+  if (!link) return;
+  if (link.getAttribute('href') === '#') {
+    e.preventDefault();
+    showToast('시안이라 아직 링크가 없어요. ITEMS의 url에 제휴 링크를 넣으면 바로 연결됩니다.');
+  }
+});
+</script>
+</body>
+</html>
